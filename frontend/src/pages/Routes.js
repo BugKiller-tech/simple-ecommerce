@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Router, Route, BrowserRouter, Switch } from 'react-router-dom';
 
-import Login from './pages/Login';
-import MainPage from './pages/client/MainPage';
-import ShopPage from './pages/client/ShopPage';
-import MyCartPage from './pages/client/MyCartPage';
+import Login from './Login';
+import Signup from './Signup';
+import MainPage from './client/MainPage';
+import ShopPage from './client/ShopPage';
+import MyCartPage from './client/MyCartPage';
 
-import AdminPage from './pages/admin/AdminPage';
+import AdminPage from './admin/AdminPage';
 
 class Routes extends Component {
   render () {
@@ -14,6 +15,7 @@ class Routes extends Component {
       <BrowserRouter>
         <Switch>
           <Route path='/login' component={Login} />
+          <Route path='/signup' component={Signup} />
           <Route path='/cart' component={MyCartPage} />
           <Route path='/shop' component={ShopPage} />
 

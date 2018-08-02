@@ -5,6 +5,13 @@ import {
 } from '@material-ui/core';
 import { ShoppingCart, Info, Comment, AddShoppingCart } from '@material-ui/icons';
 import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import logo from '../../../imgs/logo.png';
+import './style.css';
+
+const LogoImg = styled.img`
+  height: 40px;
+`
 
 const styles = theme => ({
   root: {
@@ -38,23 +45,25 @@ class Header extends Component {
       <div className={classes.root}>
         <AppBar position="static" className = {classes.appbar}>
           <Toolbar>
-            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton> */}
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              bugkiller
-            </Typography>
-            <Button color="inherit" component={NavLink} to="/">Home</Button>
-            <Button color="inherit" component={NavLink} to="/shop">Shop</Button>
-            
-            <Button color="inherit">Login</Button>
-            <Button color="inherit">Sign up</Button>
-
-            <IconButton color="inherit" component={NavLink} to="/cart">
-              <Badge badgeContent={4} color="primary" classes={{ badge: classes.badge }}>
-                <ShoppingCart></ShoppingCart>
-              </Badge>
+            <IconButton className={classes.menuButton} color="default" aria-label="Menu">
+              <LogoImg src={logo} />
             </IconButton>
+            <Typography variant="title" color="inherit" className={classes.flex}>
+              Bug killer shop
+            </Typography>
+            <div>
+              <Button color="inherit" component={NavLink} to="/">Home</Button>
+              <Button color="inherit" component={NavLink} to="/shop">Shop</Button>
+              
+              <Button color="inherit" component={NavLink} to="/login">Login</Button>
+              <Button color="inherit" component={NavLink} to="/signup">Sign up</Button>
+
+              <IconButton color="inherit" component={NavLink} to="/cart">
+                <Badge badgeContent={4} color="primary" classes={{ badge: classes.badge }}>
+                  <ShoppingCart></ShoppingCart>
+                </Badge>
+              </IconButton>
+            </div>
           </Toolbar>
         </AppBar>
       </div>

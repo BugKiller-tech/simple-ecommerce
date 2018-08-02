@@ -7,7 +7,8 @@ import {withStyles,
 } from '@material-ui/core';
 import {
   AccountCircle,
-  SecurityRounded
+  SecurityRounded,
+  FaceOutlined,
 } from '@material-ui/icons';
 
 import styled from 'styled-components';
@@ -30,7 +31,7 @@ const styles = theme => ({
   }
 });
 
-class Login extends Component {
+class Signup extends Component {
   render() {
     const { classes } = this.props;
     return (
@@ -40,8 +41,30 @@ class Login extends Component {
           <Paper elevation={1} className={classes.root}>
             <LogoImg src={logo} />
             <Typography variant="headline" component="h3">
-              Login
+              User Registration
             </Typography>
+            <TextField 
+              fullWidth={true} name="firstName"
+              label="First Name"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FaceOutlined />
+                  </InputAdornment>
+                ),
+              }} 
+            />
+            <TextField 
+              fullWidth={true} name="lastName"
+              label="Last Name"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FaceOutlined />
+                  </InputAdornment>
+                ),
+              }} 
+            />
             <TextField 
               type="email"
               fullWidth={true} name="email"
@@ -55,9 +78,22 @@ class Login extends Component {
               }} 
             />
             <TextField 
-              type="email"
-              fullWidth={true} name="email"
-              label="password"
+              type="password"
+              fullWidth={true} name="password"
+              label="Password"
+              type="password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SecurityRounded />
+                  </InputAdornment>
+                ),
+              }} 
+            />
+            <TextField 
+              type="password"
+              fullWidth={true} name="rePassword"
+              label="Password Confirm"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -67,7 +103,7 @@ class Login extends Component {
               }} 
             />
             <Button variant="outlined" color="primary" className={classes.loginButton}>
-              LogIn
+              Sign up
             </Button>
 
           </Paper>
@@ -79,4 +115,4 @@ class Login extends Component {
 
 
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Signup);

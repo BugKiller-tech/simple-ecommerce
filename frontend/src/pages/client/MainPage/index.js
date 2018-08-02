@@ -12,9 +12,11 @@ import {
 import PropTypes from 'prop-types';
 
 import Header from '../../../components/client/Header';
+import './style.css'
 
 const styles = theme => ({
- 
+ root: {
+ }
 });
 
 class MainPage extends Component {
@@ -26,7 +28,7 @@ class MainPage extends Component {
     const { classes } = this.props;
     const { products, checkedCategoryIndexs } = this.state;
     return (
-      <div className={classes.root}>
+      <div className={classes.root} id="main-page">
         <Header />
         <div className="container-fluid">
           main page

@@ -130,8 +130,8 @@ class ShopPage extends Component {
             </div>
             <div className="col-md-9">
               <div className="row">
-                {products.map(product => (
-                  <div className="col-lg-4 col-md-6 mb-3">
+                {products.map((product, idx) => (
+                  <div className="col-lg-4 col-md-6 mb-3" key={idx}>
                   <Card>
                     <CardMedia
                       className={classes.media}
