@@ -17,10 +17,10 @@ class Routes extends Component {
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/cart' component={MyCartPage} />
-          <Route path='/shop' component={ShopPage} />
 
           <Route path='/admin' component={AdminPage} />
-          <Route path='/' component={MainPage} />
+          <Route path='/' component={ShopPage} />
+          {/* <Route path='/' component={MainPage} /> */}
         </Switch>
       </BrowserRouter>
     )

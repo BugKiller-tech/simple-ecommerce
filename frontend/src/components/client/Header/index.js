@@ -52,8 +52,8 @@ class Header extends Component {
               Bug killer shop
             </Typography>
             <div>
-              <Button color="inherit" component={NavLink} to="/">Home</Button>
-              <Button color="inherit" component={NavLink} to="/shop">Shop</Button>
+              {/* <Button color="inherit" component={NavLink} to="/">Home</Button> */}
+              <Button color="inherit" component={NavLink} to="/">Shop</Button>
               
               <Button color="inherit" component={NavLink} to="/login">Login</Button>
               <Button color="inherit" component={NavLink} to="/signup">Sign up</Button>

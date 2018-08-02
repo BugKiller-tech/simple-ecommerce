@@ -118,7 +118,7 @@ class ShopPage extends Component {
                     tabIndex={-1}
                     disableRipple
                   />
-                  <ListItemText primary={`Line item ${value + 1}`} />
+                  <ListItemText primary={`Woman clothes ${value + 1}`} />
                   <ListItemSecondaryAction>
                     <IconButton aria-label="Comments">
                       <Comment />

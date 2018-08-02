@@ -30,8 +30,17 @@ class MainPage extends Component {
     return (
       <div className={classes.root} id="main-page">
         <Header />
-        <div className="container-fluid">
-          main page
+        <div className="container text-center">
+          <h1>Welcome to Shopping site</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora aliquam eius, in placeat itaque aut reprehenderit porro, tempore laboriosam dignissimos laborum optio accusamus quisquam cumque adipisci labore corporis sapiente repellat neque quibusdam alias obcaecati. Nobis praesentium rerum quaerat tempore dolorem, id consequatur voluptates qui nostrum repellat, ipsam in ex mollitia.</p>
+          <br />
+          <p>
+            please fee free to contact me. <br />
+            bugkiller
+          </p>
+
+          <Button>Start shopping</Button>
+
         </div>
       </div>
     )
