@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         user: action.user
       }
-    case types.USER_LOGGED_OUT:
+    case Types.USER_LOGGED_OUT:
       return {
         ...state,
         user: null

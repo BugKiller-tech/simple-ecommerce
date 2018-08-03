@@ -3,12 +3,16 @@ var router = express.Router();
 const path = require('path')
 
 var users = require('./users');
+var categories = require('./categories');
+var products = require('./products');
 
 const checkAuth = require('../middlewares/checkAuth');
 
 
 
 router.use('/api/user', users);
+router.use('/api/categories', categories);
+router.use('/api/products', products);
 
 router.use(checkAuth)
 
