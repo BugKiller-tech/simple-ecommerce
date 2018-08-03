@@ -178,7 +178,7 @@ class CategoryPage extends Component {
                   onClick={this.cancelEdit}
                 >Cancel</Button>
                 )}
-                
+
               </form>
 
 

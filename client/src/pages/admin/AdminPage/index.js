@@ -9,6 +9,7 @@ import {
   Typography, Divider,
   SwipeableDrawer,
   IconButton, Collapse,
+  Button,
 } from '@material-ui/core';
 import { 
   Menu as MenuIcon, 
@@ -21,9 +22,11 @@ import {
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
 } from '@material-ui/icons';
-
 import { Route, NavLink } from 'react-router-dom';
 import classNames from 'classnames';
+
+import { connect } from 'react-redux';
+import { userLogout } from '../../../actions/users';
 
 import CategoryPage from '../CategoryPage';
 import ProductsPage from '../ProductsPage';
@@ -108,6 +111,12 @@ class  AdminPage extends Component{
     open: false,
   };
 
+  componentDidMount = () => {
+    if (!this.props.isAdmin) {
+      this.props.history.push('/');
+    }
+  }
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -115,7 +124,17 @@ class  AdminPage extends Component{
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
+
+
+  gotoHomePage = () => {
+    this.props.history.push('/');
+  }
   
+  signOut = () => {
+    this.props.userLogout();
+    this.props.history.push('/');
+  }
+
   render() {
     const { classes, theme, match } = this.props;
 
@@ -134,9 +153,10 @@ class  AdminPage extends Component{
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography variant="title" color="inherit" noWrap style={{ flexGrow: 1 }}>
               Admin Page
             </Typography>
+            <Button onClick={this.gotoHomePage} color="inherit">Goto Home Page</Button>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -177,14 +197,13 @@ class  AdminPage extends Component{
               <ListItemText inset primary="Orders" />
             </ListItem>
 
-            <ListItem button >
+            <ListItem button onClick={this.signOut}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText inset primary="Log out" />
             </ListItem>
           </List>
-
           
         </Drawer>
         <main className={classes.content}>
@@ -197,7 +216,6 @@ class  AdminPage extends Component{
       </div>
     );
   }
-  
 }
 
 AdminPage.propTypes = {
@@ -205,4 +223,13 @@ AdminPage.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(AdminPage);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isAdmin: (state.auth.user && state.auth.user.isAdmin),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { userLogout }
+)(withStyles(styles, { withTheme: true })(AdminPage));

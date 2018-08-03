@@ -10,7 +10,7 @@ const checkAuth = require('../middlewares/checkAuth');
 
 
 
-router.use('/api/user', users);
+router.use('/api/users', users);
 router.use('/api/categories', categories);
 router.use('/api/products', products);
 

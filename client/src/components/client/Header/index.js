@@ -5,9 +5,12 @@ import {
 } from '@material-ui/core';
 import { ShoppingCart, Info, Comment, AddShoppingCart } from '@material-ui/icons';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import styled from 'styled-components';
 import logo from '../../../imgs/logo.png';
 import './style.css';
+import { userLogout } from '../../../actions/users';
 
 const LogoImg = styled.img`
   height: 40px;
@@ -39,11 +42,19 @@ const styles = theme => ({
 });
 
 class Header extends Component {
+
+  onLogout = () => {
+    this.props.userLogout();
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, user, cartProducts } = this.props;
+    let badgeCount = 0;
+    cartProducts.map(item => { badgeCount += item['count'] })
+    
     return (
       <div className={classes.root}>
-        <AppBar position="static" className = {classes.appbar}>
+        <AppBar position="fixed" className = {classes.appbar}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="default" aria-label="Menu">
               <LogoImg src={logo} />
@@ -54,22 +65,35 @@ class Header extends Component {
             <div>
               {/* <Button color="inherit" component={NavLink} to="/">Home</Button> */}
               <Button color="inherit" component={NavLink} to="/">Shop</Button>
-              
-              <Button color="inherit" component={NavLink} to="/login">Login</Button>
-              <Button color="inherit" component={NavLink} to="/signup">Sign up</Button>
+              { !user && <Button color="inherit" component={NavLink} to="/login">Sign In</Button> }
+              { !user && <Button color="inherit" component={NavLink} to="/signup">Sign up</Button>}
+              { user && <Button color="inherit" onClick={this.onLogout}>Sign Out</Button>}
+              { user && user.isAdmin == true && <Button color="inherit" component={NavLink} to="/admin">Goto Admin</Button>}
 
               <IconButton color="inherit" component={NavLink} to="/cart">
-                <Badge badgeContent={4} color="primary" classes={{ badge: classes.badge }}>
+                <Badge badgeContent={badgeCount} color="primary" classes={{ badge: classes.badge }}>
                   <ShoppingCart></ShoppingCart>
                 </Badge>
               </IconButton>
             </div>
           </Toolbar>
         </AppBar>
+
+        <div style={{ height: '70px' }}></div>
+        
       </div>
     )
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.auth.user,
+    cartProducts: state.cart.products
+  }
+}
 
-export default withStyles(styles)(Header);
+export default connect(mapStateToProps, {
+  userLogout
+})
+(withStyles(styles)(Header));

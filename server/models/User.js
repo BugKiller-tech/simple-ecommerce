@@ -8,6 +8,11 @@ const schema = new Schema({
   lastName: String,
   email: String,
   passwordHash: String,
+
+  isAdmin: {
+    type: Boolean,
+    default: false
+  }
   
 }, {timestamps: true});
 

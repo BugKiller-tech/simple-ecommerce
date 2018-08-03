@@ -7,6 +7,11 @@ const config = {
 }
 
 export default {
+
+  signUp: (data) => axios.post('/api/users/register', data),
+  signIn: (data) => axios.post('/api/users/login', data),
+  checkLogin: () => axios.post('/api/users/checkLogin'),
+
   createCategory: (data) => axios.post('/api/categories/create', data),
   updateCategory: (data) => axios.post('/api/categories/update', data),
   deleteCategory: (data) => axios.post('/api/categories/delete', data),

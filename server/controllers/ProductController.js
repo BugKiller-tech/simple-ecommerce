@@ -71,8 +71,9 @@ module.exports = {
       try {
         const data = Object.assign({}, req.body);
         console.log(req.file);
-        if (req.file)
-          data.imageUrl = req.protocol + '://' + req.get('host') + '/uploads/products/' + req.file.filename;
+        if (req.file && req.file.filename)
+          // data.imageUrl = req.protocol + '://' + req.get('host') + '/uploads/products/' + req.file.filename;
+          data.imageUrl = req.protocol + '://' + process.env.HOST + '/uploads/products/' + req.file.filename;
         
         if (req.body._id) {  // edit mode
           const product = await Product.findOne({ _id: req.body._id })
@@ -87,7 +88,7 @@ module.exports = {
 
         } else {  // create mode
           
-          const product = await Product.create(req.body);
+          const product = await Product.create(data);
           if (product) {
             return res.json({
               message: 'Successfully created the product'
@@ -149,7 +150,7 @@ module.exports = {
   },
   all: async (req, res) => {
     try {
-      const products = await Product.find({});
+      const products = await Product.find({}).sort({ updatedAt: -1 }).populate('category');
       if (!products) {
         return res.status(400).json({message: 'can not find products'})
       }
