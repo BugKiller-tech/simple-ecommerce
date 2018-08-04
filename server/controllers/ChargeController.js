@@ -1,5 +1,6 @@
-const Order = require('../models/Order');
+const orderid = require('order-id')('woman-shop')
 
+const Order = require('../models/Order');
 const stripeConfig = require('../config/stripeConfig');
 const stripe = require("stripe")(stripeConfig.secretKey);
 
@@ -25,15 +26,15 @@ module.exports = {
       });
       let { status, id } = response;
 
-      Order.create({
-        orderId: 'testtest',
+      const order = await Order.create({
+        orderId: orderid.generate(),
         user: req.session.user._id,
         orders: req.body.buyProducts,
         paymentId: id,
       })
       
 
-      return res.json({ message: status })
+      return res.json({ message: status, orderId: orderId })
 
     } catch (err) {
       console.log(err);
