@@ -45,3 +45,8 @@ export const removeThingFromCart = (product) => (dispatch, getState) => {
   dispatch(updatedUserCart(updatedProducts));
 
 }
+
+export const clearCart = () => (dispatch, getState) => {
+  localStorage.removeItem('products');
+  dispatch(updatedUserCart([]));
+}

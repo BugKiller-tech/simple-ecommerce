@@ -22,4 +22,7 @@ export default {
   updateProduct: (data) => axios.post('/api/products/update', data, config),
   deleteProduct: (data) => axios.post('/api/products/delete', data),
   getAllProducts: () => axios.get('/api/products/all'),
+
+
+  makeOrder:  (data) => axios.post('/api/charge', data),
 }

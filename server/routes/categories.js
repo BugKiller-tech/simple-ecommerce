@@ -5,6 +5,9 @@ const validator = require('express-joi-validation')({passError: true});
 
 const controller = require('../controllers/CategoryController');
 
+const checkAdmin = require('../middlewares/checkAdmin');
+
+
 const createSchema = Joi.object({
   name: Joi.string().required(),
   description: Joi.string().required(),
@@ -19,10 +22,13 @@ const deleteSchema = Joi.object({
 })
 
 
+router.get('/all', controller.all);
+
+router.use(checkAdmin);
+
 router.post('/create', validator.body(createSchema), controller.create);
 router.post('/update', validator.body(updateSchema), controller.update);
 router.post('/delete', validator.body(deleteSchema), controller.delete);
-router.get('/all', controller.all);
 
 
 

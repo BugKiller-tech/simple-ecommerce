@@ -4,6 +4,7 @@ const Joi = require('joi');
 const validator = require('express-joi-validation')({passError: true});
 
 const controller = require('../controllers/UserController');
+const checkAdmin = require('../middlewares/checkAdmin');
 
 const registerUserSchema = Joi.object({
   firstName: Joi.string().required(),
@@ -25,14 +26,17 @@ const loginSchema = Joi.object({
   email: Joi.string().required(),
   password: Joi.string().required()
 })
-
+router.post('/login', validator.body(loginSchema), controller.login);
+router.post('/checkLogin', controller.checkLogin);
 router.post('/register', validator.body(registerUserSchema), controller.register);
-router.post('/delete', validator.body(deleteUserSchema), controller.delete);
+
+router.use(checkAdmin);
+
 router.post('/update', validator.body(updateUserSchema), controller.update);
+router.post('/delete', validator.body(deleteUserSchema), controller.delete);
 router.get('/all', controller.all);
 
 
-router.post('/login', validator.body(loginSchema), controller.login);
-router.post('/checkLogin', controller.checkLogin);
+
 
 module.exports = router;

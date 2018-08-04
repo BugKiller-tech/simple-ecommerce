@@ -81,13 +81,13 @@ class ProductsPage extends Component {
     if (this.state.name == '') { errors['name'] = 'Please input the name'; }
     if (this.state.description == '') { errors['description'] = 'Please input the description'; }
     if (this.state.price <= 0) { errors['price'] = 'Please input the price as greater than 0'; }
-    if (this.state.imageUrl <= 0) { errors['imageUrl'] = 'Please pick one image file'; }
+    if (this.state.isEditmode == false &&  this.state.imageUrl == '') { errors['imageUrl'] = 'Please pick one image file'; }
     this.setState({ errors })
     if (Object.keys(errors).length > 0) { return }
 
     const formData = new FormData();
     if (this.state.isEditmode) formData.append('_id',this.state.selectedProductId);
-    formData.append('product', this.state.imageUrl);
+    if (this.state.imageUrl != '') formData.append('product', this.state.imageUrl);
     formData.append('name', this.state.name);
     formData.append('description', this.state.description);
     formData.append('price', this.state.price);
@@ -96,9 +96,9 @@ class ProductsPage extends Component {
     Api.createProduct(formData)
     .then(res => {
       if (this.state.isEditmode)
-        this.setState({ name: '', description: '', snackBarOpen: true, snackbarMessage: 'Successfully updated category' })
+        this.setState({ name: '', description: '', price: 0, imgSrc: '', snackBarOpen: true, snackbarMessage: 'Successfully updated category', isEditmode: false })
       else
-        this.setState({ name: '', description: '', snackBarOpen: true, snackbarMessage: 'Successfully created product' })
+        this.setState({ name: '', description: '', price: 0, imgSrc: '', snackBarOpen: true, snackbarMessage: 'Successfully created product' })
 
       this.fetchProductList();
     })
@@ -134,10 +134,12 @@ class ProductsPage extends Component {
   }
 
   onChangeFile = (e) => {
-    this.setState({
-        imageUrl: e.target.files[0],
-        imgSrc: URL.createObjectURL(e.target.files[0])
-    })
+    if (e.target.files[0]) {
+      this.setState({
+          imageUrl: e.target.files[0],
+          imgSrc: URL.createObjectURL(e.target.files[0])
+      })
+    }
   }
 
 

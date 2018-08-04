@@ -5,17 +5,13 @@ const path = require('path')
 var users = require('./users');
 var categories = require('./categories');
 var products = require('./products');
-
-const checkAuth = require('../middlewares/checkAuth');
-
-
+var charge = require('./charge');
 
 router.use('/api/users', users);
 router.use('/api/categories', categories);
 router.use('/api/products', products);
 
-router.use(checkAuth)
-
+router.use('/api', charge);
 
 
 
