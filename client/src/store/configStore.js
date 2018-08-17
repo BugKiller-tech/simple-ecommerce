@@ -17,6 +17,8 @@ export default function configStore() {
 
 
   if(localStorage.user) {
+    // store.dispatch( userLoggedIn(JSON.parse(localStorage.user)))
+    
     Api.checkLogin()
     .then(res => {
       store.dispatch( userLoggedIn(JSON.parse(localStorage.user)))

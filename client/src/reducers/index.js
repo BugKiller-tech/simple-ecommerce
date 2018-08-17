@@ -3,12 +3,14 @@ import auth from './auth';
 import categories from './categories';
 import products from './products';
 import cart from './cart';
+import orders from './orders';
 
 const rootReducer = combineReducers({
   auth,
   categories,
   products,
-  cart
+  cart,
+  orders
 })
 
 export default rootReducer;

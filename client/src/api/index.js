@@ -25,4 +25,9 @@ export default {
 
 
   makeOrder:  (data) => axios.post('/api/charge', data),
+
+
+  getAllOrders: () => axios.get('/api/orders/all'),
+  getMyOrders: () => axios.get('/api/orders/getMyHistory'),
+  setAsDeliveredOrder: (data) => axios.post('/api/orders/setAsDelivered', data),
 }

@@ -174,6 +174,9 @@ class ProductsPage extends Component {
       }
     ]
     const filteredProducts = products.filter(item => {
+      if (this.state.selectedCategoryId == '') return true;
+      
+      if (!item.category) { return; }
       return item.category._id == this.state.selectedCategoryId
     })
 

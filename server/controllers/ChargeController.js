@@ -26,13 +26,14 @@ module.exports = {
       });
       let { status, id } = response;
 
+      let orderId = orderid.generate();
+
       const order = await Order.create({
-        orderId: orderid.generate(),
+        orderId: orderId,
         user: req.session.user._id,
         orders: req.body.buyProducts,
         paymentId: id,
       })
-      
 
       return res.json({ message: status, orderId: orderId })
 

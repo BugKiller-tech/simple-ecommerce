@@ -54,10 +54,10 @@ class CheckoutForm extends Component {
       }
 
       const response = await Api.makeOrder(data);
-      this.setState({ loading: false})
+      this.setState({ loading: false })
       alert('Thank you for purchasing! The thing will be delivered in time!')
       this.props.clearCart();
-      this.props.history.push('/');
+      window.location = '/';
 
       // console.log(response);
     } catch (err) {
@@ -115,7 +115,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 export default connect(
-  mapStateToProps, {
+  mapStateToProps, 
+  {
     clearCart,
   }
 )(

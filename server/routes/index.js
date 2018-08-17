@@ -6,10 +6,12 @@ var users = require('./users');
 var categories = require('./categories');
 var products = require('./products');
 var charge = require('./charge');
+var orders = require('./orders');
 
 router.use('/api/users', users);
 router.use('/api/categories', categories);
 router.use('/api/products', products);
+router.use('/api/orders', orders);
 
 router.use('/api', charge);
 
